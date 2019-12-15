@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Test-class Suite" parallel="tests" thread-count="2">
+    <test verbose="2" preserve-order="true" name="Km1">
+        <classes>
+            <class name="Tests.Setup" />
+            <class name="Tests.Login"></class>
+            <!-- <class name="Tests.CreateLKO"></class>
+             <class name="Tests.ChangeLKO"></class>
+             <class name="Tests.UploadPacket"/>
+            <class name="Tests.SettingAccounts"></class>-->
+            <class name="Tests.Entry999"></class>
+            <!--  <class name="Tests.LoadPayments"></class>
+              <class name="Tests.SettingsKD"></class>
+              <class name="Tests.OperationsFL"></class> -->
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="KM2">
+        <classes>
+            <class name="Tests.Setup" />
+            <class name="Tests.Login"></class>
+            <!-- <class name="Tests.CreateLKO"></class>
+             <class name="Tests.ChangeLKO"></class>
+             <class name="Tests.UploadPacket"/>
+            <class name="Tests.SettingAccounts"></class>-->
+            <class name="Tests.Entry999"></class>
+            <!--  <class name="Tests.LoadPayments"></class>
+              <class name="Tests.SettingsKD"></class>
+              <class name="Tests.OperationsFL"></class> -->
+        </classes>
+    </test>
+</suite>
