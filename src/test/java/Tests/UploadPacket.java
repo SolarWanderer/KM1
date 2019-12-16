@@ -27,9 +27,9 @@ public class UploadPacket extends Setup {
         $(By.linkText("Запустить загрузку")).click();
        // $("[ng-click='$ctrl.cancel()'][type='button']").shouldBe(exist).click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
-        Configuration.timeout=600000;
+        Configuration.timeout=6000000;
         $("[ng-class='getClassForStatus(pack.packageStatusId)']").shouldHave(matchesText("Обработан без ошибок"));
-        Configuration.timeout=10000;
+        Configuration.timeout=30000;
         $("[type='button'][ng-click='loadData()']").click();
         $(By.linkText("Действия с пакетом")).click();
         $(By.linkText("Утвердить загрузку")).click();

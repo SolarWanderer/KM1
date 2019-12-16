@@ -27,7 +27,7 @@ public class Sudebka extends Setup {
         $(By.xpath(".//div[@value='ДКА-1646']")).shouldBe(exist, enabled).click();
         $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
     }
-        /*
+
         //1
         $(By.linkText("Вынести на просрочку")).click();
         $("#field").shouldBe(exist).clear();
@@ -69,10 +69,10 @@ public class Sudebka extends Setup {
         $$("[data='operations'] [ng-repeat='row in data.rows']").filterBy(text("Начисление процентов")).shouldHaveSize(7);
         $$("[data='operations'] [ng-repeat='row in data.rows']").filterBy(text("Вынесение на просрочку")).shouldHaveSize(4);
         $$("[data='operations'] [ng-repeat='row in data.rows']").filterBy(text("Начисление неустоек")).shouldHaveSize(3);
-        */
+
 
     }
-    /*@Test(priority = 2)
+    @Test(priority = 2)
     public void Setting1646Client() {
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Общая информация']]")).click();
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Общая информация']]")).shouldBe(attribute("class", "ng-scope active"));
@@ -111,7 +111,7 @@ public class Sudebka extends Setup {
             $(By.xpath("//ol[contains(@class,'breadcrumb')]//*[text()='КД №ДКА-1646 ФЛ Шмаков Виталий Се']")).click();
             $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Параметры договора']]")).shouldBe(exist);
         }
-    }*/
+    }
 
     @Test(priority = 3)
     public void Parametrs1646() {
@@ -121,7 +121,7 @@ public class Sudebka extends Setup {
         //TODO Махинации в параметрах договора
 
     }
-   /* @Test(priority = 4)
+    @Test(priority = 4)
     public void CreateWork1646() {
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Судебная работа']]")).scrollIntoView(true).click();
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Судебная работа']]")).shouldBe(attribute("class", "ng-scope active"));
@@ -192,8 +192,8 @@ public class Sudebka extends Setup {
                 ,text("625 965.66"),text("624 590.85")
         );
 
-    }*/
-  /* @Test(priority = 5)
+    }
+   @Test(priority = 5)
    public void Isparav1646(){
        $(By.linkText("Сопровождение КД")).click();
        $(By.linkText("Регистры")).scrollIntoView(true).click();
@@ -243,14 +243,76 @@ public class Sudebka extends Setup {
        $(".breadcrumb").find(By.linkText("КД №ДКА-1646 ФЛ Шмаков Виталий Се")).click();
        //$$("[ng-repeat='item in regTree track by $index']").findBy(matchesText("Требования по неустойке по просроченным % на просроченный ОД - начисление в КМ")).find(By.linkText(""))
 
-   }*/
+   }
 
 
-    @Test(priority = 5)
-    public void operations1646(){
+    @Test(priority = 6)
+    public void AddAccounts(){
         $(By.linkText("Редактирование КД")).shouldBe(exist).click();
         $(By.linkText("Поставить на учет")).click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
+        $("[ng-click='openOperationDayModalCalendar()']").click();
+        $("#operationDayDate").clear();
+        $("#operationDayDate").sendKeys("11082017");
+        ClickAndWaitModal("[ng-click='$ctrl.ok()']");
+        $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Счета']]")).scrollIntoView(true).click();
+        $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Счета']]")).shouldBe(attribute("class", "ng-scope active"));
+        $("#accounts #picAdd").shouldBe(enabled).click();
+        $("input#accPlanNum").shouldBe(exist).sendKeys("61212");
+        $("#page-wrapper").click();
+        $("#accCategoryIdModal").selectOptionContainingText("Выбытие, погашение имущества (в т.ч. приобретенных прав требований)");
+        $("[ng-click='next()']").click();
+        $("#accPlanNum").shouldHave(value("61212"));
+        $("[ng-click='next()']").click();
+
+        $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Счета']]")).scrollIntoView(true).click();
+        $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Счета']]")).shouldBe(attribute("class", "ng-scope active"));
+        $("#accounts #picAdd").shouldBe(enabled).click();
+        $("#accCategoryIdModal").shouldBe(exist).selectOptionContainingText("Задолженность по ОД, списанная за счет резервов на возможные потери по кредитам");
+        $("input#accPlanNum").shouldHave(value("91802"));
+        $("[ng-click='next()']").click();
+        $("#accPlanNum").shouldHave(value("91802"));
+        $("[ng-click='next()']").click();
+
+        $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Счета']]")).scrollIntoView(true).click();
+        $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Счета']]")).shouldBe(attribute("class", "ng-scope active"));
+        $("#accounts #picAdd").shouldBe(enabled).click();
+        $("#accCategoryIdModal").shouldBe(exist).selectOptionContainingText("Неполученные проценты по кредитам, предоставленным клиентам, списанным с баланса кредитной организации");
+        $("input#accPlanNum").shouldHave(value("91704"));
+        $("[ng-click='next()']").click();
+        $("#accPlanNum").shouldHave(value("91704"));
+        $("[ng-click='next()']").click();
+
+
+
+
+    }
+    @Test(priority = 7)
+    public void Operations1646(){
+        $(By.linkText("Сопровождение КД")).shouldBe(exist).click();
+        $(By.linkText("Списать задолженность за счет резерва")).scrollIntoView(true).click();
+        $("#field").clear();
+        $("#field").sendKeys("25122017");
+        $("[ng-click='ok()']").shouldBe(exist).click();
+        ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
+        $(By.linkText("Сопровождение КД")).shouldBe(exist).click();
+        $(By.linkText("Списать безнадежную задолженность с внебаланса")).scrollIntoView(true).click();
+        $("#field").clear();
+        $("#field").sendKeys("26122017");
+        $("[ng-click='ok()']").shouldBe(exist).click();
+        ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
+        $(".breadcrumb").find(By.linkText("Кредитные договоры")).click();
+        $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='История операций']]")).click();
+        $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='История операций']]")).shouldBe(attribute("class", "ng-scope active"));
+        $("[data='operations'] [ng-repeat='row in data.rows']", 0).shouldHave
+                (matchText("^[0-9]\\d*"), text("Списание безнадежной задолженности с внебаланса"),
+                        text("26.12.2017"), text("Списание безнадежной задолженности с внебаланса в 26.12.2017"),
+                        text("Исполнена")).find(By.cssSelector("a")).click();
+        $$("[items='stepsData'] [ng-repeat='item in items']").shouldHaveSize(2);
+        $("[items='stepsData'] [ng-repeat='item in items']", 0).shouldHave
+                (text("1"), text("Списание безнадежной задолженности по просроченному ОД с внебаланса"), text("566 666.66"), text("RUB"), text("566 666.66"));
+        $("[items='stepsData'] [ng-repeat='item in items']", 1).shouldHave
+                (text("2"), text("Списание безнадежной задолженности по просроченным процентам с внебаланса"), text("6 054.79"), text("RUB"), text("6 054.79"));
 
     }
 }

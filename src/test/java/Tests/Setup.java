@@ -64,7 +64,7 @@ public class Setup {
         String chars = "123456789";
         //name = "Тесты"+randomString(chars,3);
         product= "Кредитный продукт" + randomString(chars,3);
-        name="Тесты383";
+        name="Тесты384";
         str = Generate_inn(randomString(chars, 10));
         xpath = "//DIV[@class='full-height-scroll']//TD[@class='ng-binding'][text()='" + name + "']";
         System.setProperty("webdriver.chrome.driver", "C://Users//k.melnikov//IdeaProjects//KM//chromedriver.exe");
