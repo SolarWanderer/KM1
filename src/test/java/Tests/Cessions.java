@@ -83,9 +83,10 @@ public class Cessions extends Setup {
         $(By.linkText("Структура задолженности")).click();
         $("#operationDate").shouldBe(visible).clear();
         $("#operationDate").sendKeys("16092017");
-        $("[ng-click='continueDebtStructure()']").click();
+        TryStructure("23 248.86");
+        //$("[ng-click='continueDebtStructure()']").click();
 
-        $("[ng-repeat='c in sum']").shouldHave(text("ИТОГО:"),text("23 248.86"), text("RUB"));
+       // $("[ng-repeat='c in sum']").shouldHave(text("ИТОГО:"),text("23 248.86"), text("RUB"));
         //$("[ng-click='cancel()']").click();
         $(By.xpath("//ol[contains(@class,'breadcrumb')]//a[text()='Кредитные договоры']")).click();
 

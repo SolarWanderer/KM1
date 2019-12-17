@@ -261,11 +261,11 @@ public class Sudebka extends Setup {
         $("input#accPlanNum").shouldBe(exist).sendKeys("61212");
         $("#page-wrapper").click();
         $("#accCategoryIdModal").selectOptionContainingText("Выбытие, погашение имущества (в т.ч. приобретенных прав требований)");
-        $("[ng-click='next()']").click();
-        $("#accPlanNum").shouldHave(value("61212"));
-        $("[ng-click='next()']").click();
+        $("[ng-click='next()']").shouldBe(exist).click();
+        //$("#accPlanNum").shouldHave(value("61212"));
+        $("[ng-click='next()']").shouldBe(exist,enabled).click();
 
-        $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Счета']]")).scrollIntoView(true).click();
+        $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Счета']]")).shouldBe(exist).scrollIntoView(true).click();
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Счета']]")).shouldBe(attribute("class", "ng-scope active"));
         $("#accounts #picAdd").shouldBe(enabled).click();
         $("#accCategoryIdModal").shouldBe(exist).selectOptionContainingText("Задолженность по ОД, списанная за счет резервов на возможные потери по кредитам");
@@ -274,7 +274,7 @@ public class Sudebka extends Setup {
         $("#accPlanNum").shouldHave(value("91802"));
         $("[ng-click='next()']").click();
 
-        $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Счета']]")).scrollIntoView(true).click();
+        $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Счета']]")).shouldBe(exist).scrollIntoView(true).click();
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Счета']]")).shouldBe(attribute("class", "ng-scope active"));
         $("#accounts #picAdd").shouldBe(enabled).click();
         $("#accCategoryIdModal").shouldBe(exist).selectOptionContainingText("Неполученные проценты по кредитам, предоставленным клиентам, списанным с баланса кредитной организации");
@@ -301,7 +301,7 @@ public class Sudebka extends Setup {
         $("#field").sendKeys("26122017");
         $("[ng-click='ok()']").shouldBe(exist).click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
-        $(".breadcrumb").find(By.linkText("Кредитные договоры")).click();
+
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='История операций']]")).click();
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='История операций']]")).shouldBe(attribute("class", "ng-scope active"));
         $("[data='operations'] [ng-repeat='row in data.rows']", 0).shouldHave
@@ -313,6 +313,6 @@ public class Sudebka extends Setup {
                 (text("1"), text("Списание безнадежной задолженности по просроченному ОД с внебаланса"), text("566 666.66"), text("RUB"), text("566 666.66"));
         $("[items='stepsData'] [ng-repeat='item in items']", 1).shouldHave
                 (text("2"), text("Списание безнадежной задолженности по просроченным процентам с внебаланса"), text("6 054.79"), text("RUB"), text("6 054.79"));
-
+        $(".breadcrumb").find(By.linkText("Кредитные договоры")).click();
     }
 }

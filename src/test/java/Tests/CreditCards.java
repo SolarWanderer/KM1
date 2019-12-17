@@ -30,9 +30,10 @@ public class CreditCards extends Setup {
         $(By.linkText("Структура задолженности")).click();
         $("#operationDate").shouldBe(visible).clear();
         $("#operationDate").sendKeys("18082017");
-        $("[ng-click='continueDebtStructure()']").click();
-     System.out.println($(".table tr",4).getText());
-        $(".table tr",4).shouldHave(text("ИТОГО:"),text("11 053.76"), text("RUB"));
+       // $("[ng-click='continueDebtStructure()']").click();
+   //  System.out.println($(".table tr",4).getText());
+       // $(".table tr",4).shouldHave(text("ИТОГО:"),text("11 053.76"), text("RUB"));
+        TryStructure("11 053.76");
         $("[ng-click='cancel()']").click();
 
         //Погашение
@@ -108,9 +109,10 @@ public class CreditCards extends Setup {
         $(By.linkText("Структура задолженности")).click();
         $("#operationDate").shouldBe(visible).clear();
         $("#operationDate").sendKeys("25082017");
-        $("[ng-click='continueDebtStructure()']").click();
-        System.out.println($(".table tr",4).getText());
-        $(".table tr",4).shouldHave(text("ИТОГО:"),text("17 580.79"), text("RUB"));
+       // $("[ng-click='continueDebtStructure()']").click();
+       // System.out.println($(".table tr",4).getText());
+       // $(".table tr",4).shouldHave(text("ИТОГО:"),text("17 580.79"), text("RUB"));
+        TryStructure("17 580.79");
         $("[ng-click='cancel()']").click();
         //Погашение
         $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
@@ -138,9 +140,10 @@ public class CreditCards extends Setup {
         $(By.linkText("Структура задолженности")).click();
         $("#operationDate").shouldBe(visible).clear();
         $("#operationDate").sendKeys("31082017");
-        $("[ng-click='continueDebtStructure()']").click();
-        System.out.println($(".table tr",3).getText());
-        $(".table tr",3).shouldHave(text("ИТОГО:"),text("15 000.00"), text("RUB"));
+        TryStructure("15 000.00");
+      //  $("[ng-click='continueDebtStructure()']").click();
+       // System.out.println($(".table tr",3).getText());
+       // $(".table tr",3).shouldHave(text("ИТОГО:"),text("15 000.00"), text("RUB"));
         $("[ng-click='cancel()']").click();
         //TODO Проверки
         $(By.xpath("//ol[contains(@class,'breadcrumb')]//a[text()='Кредитные договоры']")).click();
@@ -157,9 +160,10 @@ public class CreditCards extends Setup {
         $(By.linkText("Структура задолженности")).click();
         $("#operationDate").shouldBe(visible).clear();
         $("#operationDate").sendKeys("25082017");
-        $("[ng-click='continueDebtStructure()']").click();
-        System.out.println($(".table tr",4).getText());
-        $(".table tr",4).shouldHave(text("ИТОГО:"),text("5 837.04"), text("RUB"));
+        TryStructure("5 837.04");
+      //  $("[ng-click='continueDebtStructure()']").click();
+       // System.out.println($(".table tr",4).getText());
+       // $(".table tr",4).shouldHave(text("ИТОГО:"),text("5 837.04"), text("RUB"));
         $("[ng-click='cancel()']").click();
         //Погашение
 
@@ -187,9 +191,10 @@ public class CreditCards extends Setup {
         $(By.linkText("Структура задолженности")).click();
         $("#operationDate").shouldBe(visible).clear();
         $("#operationDate").sendKeys("31082017");
-        $("[ng-click='continueDebtStructure()']").click();
-        System.out.println($(".table tr",4).getText());
-        $(".table tr",3).shouldHave(text("ИТОГО:"),text("5 000.00"), text("RUB"));
+        TryStructure("5 000.00");
+       // $("[ng-click='continueDebtStructure()']").click();
+       // System.out.println($(".table tr",4).getText());
+       // $(".table tr",3).shouldHave(text("ИТОГО:"),text("5 000.00"), text("RUB"));
         $("[ng-click='cancel()']").click();
         //TODO Проверки
         $(By.xpath("//ol[contains(@class,'breadcrumb')]//a[text()='Кредитные договоры']")).click();

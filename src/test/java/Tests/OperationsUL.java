@@ -43,8 +43,9 @@ public class OperationsUL extends Setup {
        $(By.linkText("Структура задолженности")).click();
         $("#operationDate").shouldBe(visible).clear();
         $("#operationDate").sendKeys("05102017");
-        $("[ng-click='continueDebtStructure()']").click();
-        $(".table [ng-repeat='c in sum']").shouldHave(text("ИТОГО:"),text("474 862.98"), text("RUB"));
+        TryStructure("474 862.98");
+       // $("[ng-click='continueDebtStructure()']").click();
+       // $(".table [ng-repeat='c in sum']").shouldHave(text("ИТОГО:"),text("474 862.98"), text("RUB"));
         $("[ng-click='cancel()']").click();
         //вынесение на просрочку
         $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
@@ -103,8 +104,9 @@ public class OperationsUL extends Setup {
         $(By.linkText("Структура задолженности")).click();
         $("#operationDate").shouldBe(visible).clear();
         $("#operationDate").sendKeys("14082017");
-        $("[ng-click='continueDebtStructure()']").click();
-        $(".table [ng-repeat='c in sum']").shouldHave(text("ИТОГО:"),text("2 553 082.19"), text("RUB"));
+        TryStructure("2 553 082.19");
+       // $("[ng-click='continueDebtStructure()']").click();
+       // $(".table [ng-repeat='c in sum']").shouldHave(text("ИТОГО:"),text("2 553 082.19"), text("RUB"));
         $("[ng-click='cancel()']").click();
         //Погашение задолженности
         $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
@@ -154,8 +156,9 @@ public class OperationsUL extends Setup {
         $(By.linkText("Структура задолженности")).click();
         $("#operationDate").shouldBe(visible).clear();
         $("#operationDate").sendKeys("13092017");
-        $("[ng-click='continueDebtStructure()']").click();
-        $(".table [ng-repeat='c in sum']").shouldHave(text("ИТОГО:"),text("2 407 945.20"), text("RUB"));
+        TryStructure("2 407 945.20");
+       // $("[ng-click='continueDebtStructure()']").click();
+       // $(".table [ng-repeat='c in sum']").shouldHave(text("ИТОГО:"),text("2 407 945.20"), text("RUB"));
         $("[ng-click='cancel()']").click();
         //Погашение задолженности
         $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();

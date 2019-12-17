@@ -1,4 +1,5 @@
 package Tests;
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.ex.ElementShould;
 import org.openqa.selenium.By;
@@ -58,19 +59,31 @@ public class Setup {
             $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
         }
     }
+    public static void TryStructure(String value){
+       sleep(1000);
+       try {
+           $("[ng-click='continueDebtStructure()']").click();
+           $(".table [ng-repeat='c in sum']").shouldHave(text("ИТОГО:"),text(value), text("RUB"));
+       }
+       catch (ElementShould ex){
+           $("[ng-click='continueDebtStructure()']").click();
+           $(".table [ng-repeat='c in sum']").shouldHave(text("ИТОГО:"),text(value), text("RUB"));
+    }
+   }
 
     @BeforeSuite
         public void SettingBrowser() {
         String chars = "123456789";
         //name = "Тесты"+randomString(chars,3);
         product= "Кредитный продукт" + randomString(chars,3);
-        name="Тесты384";
+        name="ПМИ17.12_1";
         str = Generate_inn(randomString(chars, 10));
         xpath = "//DIV[@class='full-height-scroll']//TD[@class='ng-binding'][text()='" + name + "']";
         System.setProperty("webdriver.chrome.driver", "C://Users//k.melnikov//IdeaProjects//KM//chromedriver.exe");
         System.setProperty("selenide.browser", "Chrome");
         Configuration.startMaximized=true;
         Configuration.timeout= 30000;
+
 
         Configuration.holdBrowserOpen = true;
         open("http://asv-km-t-bl2.dfu.i-teco.ru/km/login");
