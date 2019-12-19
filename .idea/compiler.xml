@@ -13,7 +13,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="KM" options="--add-exports=jdk.internal.vm.compiler/org.graalvm.compiler.replacements=ALL-UNNAMED" />
+      <module name="KM" options="" />
     </option>
   </component>
 </project>

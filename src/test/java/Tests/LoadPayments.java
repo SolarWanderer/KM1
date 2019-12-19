@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
+import static org.openqa.selenium.By.linkText;
 
 
 public class LoadPayments extends Setup {
@@ -35,12 +36,14 @@ public class LoadPayments extends Setup {
         //$(By.xpath("//button[text()='Закрыть']")).shouldBe(exist).click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
         try {
-            $(By.xpath("//li//a[text()='Входящие платежи']")).click();
+            //$(".breadcrumb").find(linkText("Входящие платежи")).click();
+            $(".breadcrumb").find(linkText("Входящие платежи")).click();
+            $("[title='Обновить']").click();
             $(By.xpath("//A[text()='1']/../../..//div[@class='icheckbox_square-green']")).shouldBe(exist);
 
         }
         catch (ElementNotFound ex)
-        {  $(By.xpath("//li//a[text()='Входящие платежи']")).click();
+        {  $(".breadcrumb").find(linkText("Входящие платежи")).click();
             $("[title='Обновить']").click();
             $(By.xpath("//A[text()='1']/../../..//div[@class='icheckbox_square-green']")).shouldBe(exist);
 
@@ -107,7 +110,7 @@ public class LoadPayments extends Setup {
        // $("[ng-click='$ctrl.cancel()'][type='button']").shouldBe(exist).click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
         //$("[section-name='downloadProcesses']").scrollTo();
-        $(By.xpath("//li//a[text()='Входящие платежи']")).click();
+        $(".breadcrumb").find(linkText("Входящие платежи")).click();
 
     }
     @Test(enabled = false)
@@ -130,7 +133,7 @@ public class LoadPayments extends Setup {
         $(By.xpath("//button[text()='Загрузить']")).click();
         //$(By.xpath("//button[text()='Закрыть']")).shouldBe(exist).click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
-        $(By.xpath("//li//a[text()='Входящие платежи']")).click();
+        $(".breadcrumb").find(linkText("Входящие платежи")).click();
         $(By.xpath("//A[text()='1']/../../..//div[@class='icheckbox_square-green']")).shouldBe(exist).click();
         $(By.xpath("//A[text()='2']/../../..//div[@class='icheckbox_square-green']")).shouldBe(exist).click();
         $(By.xpath("//A[text()='3']/../../..//div[@class='icheckbox_square-green']")).shouldBe(exist).click();
@@ -188,7 +191,7 @@ public class LoadPayments extends Setup {
         // $("[ng-click='$ctrl.cancel()'][type='button']").shouldBe(exist).click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
         //$("[section-name='downloadProcesses']").scrollTo();
-        $(By.xpath("//li//a[text()='Входящие платежи']")).click();
+        $(".breadcrumb").find(linkText("Входящие платежи")).click();
         $(By.xpath("//A[text()='1']/../../..//div[@class='icheckbox_square-green']")).shouldBe(exist).click();
         $(By.xpath("//A[text()='2']/../../..//div[@class='icheckbox_square-green']")).shouldBe(exist).click();
         $(By.xpath("//A[text()='3']/../../..//div[@class='icheckbox_square-green']")).shouldBe(exist).click();
@@ -203,13 +206,13 @@ public class LoadPayments extends Setup {
         $(By.linkText("Операции")).shouldBe(exist).click();
         $(By.linkText("Откатить")).click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
-        $(By.xpath("//li//a[text()='Входящие платежи']")).click();
+        $(".breadcrumb").find(linkText("Входящие платежи")).click();
         $(By.linkText("5")).shouldBe(exist).click();
         $(By.linkText("Реестр платежей")).shouldBe(exist).click();
         $(By.linkText("Удалить реестр платежей")).click();
         //$("[ng-click='$ctrl.ok()']").shouldBe(exist).click();
         ClickAndWaitModal("[ng-click='$ctrl.ok()']");
-        $(By.xpath("//li//a[text()='Входящие платежи']")).click();
+        $(".breadcrumb").find(linkText("Входящие платежи")).click();
         $(By.xpath("//A[text()='5']/../../..//div[@class='icheckbox_square-green']")).shouldBe(exist).click();
         $(By.linkText("Операции")).click();
         $(By.linkText("Удалить")).click();
@@ -260,7 +263,7 @@ public class LoadPayments extends Setup {
 
             ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
             try {
-                $(By.xpath("//li//a[text()='Входящие платежи']")).click();
+                $(".breadcrumb").find(linkText("Входящие платежи")).click();
                 $(By.xpath("//A[text()='1']/../../..//div[@class='icheckbox_square-green']")).shouldBe(exist).click();
                 $(By.xpath("//A[text()='2']/../../..//div[@class='icheckbox_square-green']")).shouldBe(exist).click();
             }
@@ -305,7 +308,7 @@ public class LoadPayments extends Setup {
 
             ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
             try {
-                $(By.xpath("//li//a[text()='Входящие платежи']")).click();
+                $(".breadcrumb").find(linkText("Входящие платежи")).click();
                 $(By.xpath("//A[text()='4']/../../..//div[@class='icheckbox_square-green']")).shouldBe(exist).click();
                 $(By.xpath("//A[text()='5']/../../..//div[@class='icheckbox_square-green']")).shouldBe(exist).click();
             }
@@ -347,7 +350,7 @@ public class LoadPayments extends Setup {
 
             ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
             try {
-                $(By.xpath("//li//a[text()='Входящие платежи']")).click();
+                $(".breadcrumb").find(linkText("Входящие платежи")).click();
                 $(By.xpath("//A[text()='1']/../../..//div[@class='icheckbox_square-green']")).shouldBe(exist);
                 $(By.xpath("//A[text()='2']/../../..//div[@class='icheckbox_square-green']")).shouldBe(exist);
             }

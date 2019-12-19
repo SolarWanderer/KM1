@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
+import static org.openqa.selenium.By.linkText;
+
 public class Rezerv_RVI extends Setup {
     @Test(priority = 0)
     public void MoveToKdReestr() {
@@ -51,8 +53,8 @@ public class Rezerv_RVI extends Setup {
        // $(By.xpath("//*[text()='Закрыть']")).shouldBe(exist).click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
         //Начисление резерва
-        $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
-        $(By.linkText("Начислить резервы")).click();
+        $(linkText("Сопровождение КД")).shouldBe(enabled).click();
+        $(linkText("Начислить резервы")).click();
         $("#modalWindow #operationDate").shouldBe(exist).clear();
         $("#modalWindow #operationDate").sendKeys("16082017");
         $(".modal-title").click();
@@ -71,7 +73,7 @@ public class Rezerv_RVI extends Setup {
                 (matchText("^[0-9]\\d*"), text("Начисление суммы резерва"), text("16.08.2017"), text("Начисление суммы резерва"), text("Исполнена")).find(By.cssSelector("a")).click();
         $("[items='stepsData'] [ng-repeat='item in items']", 0).shouldHave
                 (text("10"), text("Начисление суммы резерва по текущему ОД"), text("Резерв по текущему ОД"), text("459 861.11"), text("RUB"), text("459 861.11"));
-        $(By.xpath("//ol[contains(@class,'breadcrumb')]//a[text()='Кредитные договоры']")).click();
+        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
     }
     @Test(priority = 2)
     public void RezervMass(){
@@ -79,8 +81,8 @@ public class Rezerv_RVI extends Setup {
         $(By.xpath("//A[text()='ДКИ-2373']/../../..//ins[@class='iCheck-helper']")).click();
         $(By.xpath("//A[text()='ДКА-2400']/../../..//ins[@class='iCheck-helper']")).click();
         $(By.xpath("//A[text()='ДКА-2381']/../../..//ins[@class='iCheck-helper']")).click();
-        $(By.linkText("Операции")).click();
-        $(By.linkText("Начислить резервы")).click();
+        $(linkText("Операции")).click();
+        $(linkText("Начислить резервы")).click();
         $("#modalWindow #operationDate").shouldBe(exist).clear();
         $("#modalWindow #operationDate").sendKeys("26092017");
         $(".modal-title").click();
@@ -179,20 +181,20 @@ public class Rezerv_RVI extends Setup {
         //this.actions.moveToElement($(By.xpath("//A[text()='ДКА-2484']/../../..//ins[@class='iCheck-helper']"))).perform();
         $(By.xpath("//A[text()='ВИ-1602']/../../..//ins[@class='iCheck-helper']")).click();
         // this.actions.moveToElement($(By.xpath("//A[text()='ГС-555']/../../..//ins[@class='iCheck-helper']"))).perform();
-        $(By.linkText("Операции")).click();
-        $(By.linkText("Взять на редактирование")).click();
+        $(linkText("Операции")).click();
+        $(linkText("Взять на редактирование")).click();
         $(By.xpath("//div[@class='modal-content']//button[text()='Да']")).shouldBe(exist).click();
         //sleep(1000);
        // $(By.xpath("//button[text()='Закрыть']")).shouldBe(exist).click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
-        $(By.linkText("Операции")).click();
-        $(By.linkText("Указать кредитный продукт")).click();
+        $(linkText("Операции")).click();
+        $(linkText("Указать кредитный продукт")).click();
         $(By.xpath("//select[@ng-model='productIdModal']")).shouldBe(exist).selectOptionContainingText(product);
         $(".modal-dialog [ng-click='next()']").click();
         $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
 
-        $(By.linkText("Операции")).click();
-        $(By.linkText("Поставить на учет")).click();
+        $(linkText("Операции")).click();
+        $(linkText("Поставить на учет")).click();
        // $(By.xpath("//div[@class='modal-content']//button[text()='Да']")).shouldBe(exist).click();
         //sleep(1000);
         //$(By.xpath("//button[text()='Закрыть']")).shouldBe(exist).click();
@@ -206,8 +208,8 @@ public class Rezerv_RVI extends Setup {
         }
         $(By.xpath(".//li[normalize-space(.)='Кредитные продукты']")).click();
         $(By.xpath(".//div[@value='"+product+"']")).shouldBe(exist).click();
-        $(By.linkText("Операции")).shouldBe(exist).click();
-        $(By.linkText("Сформировать графики платежей РВИ")).click();
+        $(linkText("Операции")).shouldBe(exist).click();
+        $(linkText("Сформировать графики платежей РВИ")).click();
         $("#modalWindow #startDate").sendKeys("11082017");
         $(".modal-header").click();
         $("#modalWindow #endDate").sendKeys("31122019");
@@ -225,13 +227,13 @@ public class Rezerv_RVI extends Setup {
     public void Operations5009(){
         $(By.xpath(".//div[@value='ВИ-5009']")).shouldBe(exist, enabled).click();
         try {
-            $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
+            $(linkText("Сопровождение КД")).shouldBe(enabled).click();
         } catch (ElementNotFound ex) {
             $(By.xpath(".//div[@value='ВИ-5009']")).shouldBe(exist, enabled).click();
-            $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
+            $(linkText("Сопровождение КД")).shouldBe(enabled).click();
 
         }
-        $(By.linkText("Погасить задолженность")).click();
+        $(linkText("Погасить задолженность")).click();
         $("#accountId").shouldBe(exist).selectOptionContainingText("47422810100000005009");
         $("#repaymentDate").clear();
         $("#repaymentDate").sendKeys("31082017");
@@ -269,7 +271,7 @@ public class Rezerv_RVI extends Setup {
                 (text("2"), text("Погашение текущих процентов (баланс)"), text("Требования по % по ОД-Баланс"), text("9 304.14"), text("RUB"), text("9 304.14"));
         $("[items='stepsData'] [ng-repeat='item in items']", 1).shouldHave
                 (text("3"), text("Погашение текущих процентов (внебаланс)"), text("Требования по % по ОД-Внебаланс"), text("9 695.86"), text("RUB"), text("9 695.86"));
-        $(By.xpath("//ol[contains(@class,'breadcrumb')]//a[text()='Кредитные договоры']")).click();
+        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
     }
 
 }

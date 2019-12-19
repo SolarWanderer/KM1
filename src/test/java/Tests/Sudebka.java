@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
+import static org.openqa.selenium.By.linkText;
+
 public class Sudebka extends Setup {
     @Test(priority = 0)
     public void MoveToKdReestr() {
@@ -21,15 +23,15 @@ public class Sudebka extends Setup {
     public void prosrocka1646() {
     $(By.xpath(".//div[@value='ДКА-1646']")).shouldBe(exist, enabled).click();
         try {
-        $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
+        $(linkText("Сопровождение КД")).shouldBe(enabled).click();
     } catch (
     ElementNotFound ex) {
         $(By.xpath(".//div[@value='ДКА-1646']")).shouldBe(exist, enabled).click();
-        $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
+        $(linkText("Сопровождение КД")).shouldBe(enabled).click();
     }
 
         //1
-        $(By.linkText("Вынести на просрочку")).click();
+        $(linkText("Вынести на просрочку")).click();
         $("#field").shouldBe(exist).clear();
         $("#field").sendKeys("16082017");
         $("[ng-click='ok()']").click();
@@ -37,8 +39,8 @@ public class Sudebka extends Setup {
         $("[ng-click='$ctrl.cancel()']").shouldBe(exist).click();
         $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
         //2
-        $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
-        $(By.linkText("Вынести на просрочку")).click();
+        $(linkText("Сопровождение КД")).shouldBe(enabled).click();
+        $(linkText("Вынести на просрочку")).click();
         $("#field").shouldBe(exist).clear();
         $("#field").sendKeys("16092017");
         $("[ng-click='ok()']").click();
@@ -46,8 +48,8 @@ public class Sudebka extends Setup {
         $("[ng-click='$ctrl.cancel()']").shouldBe(exist).click();
         $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
         //3
-        $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
-        $(By.linkText("Вынести на просрочку")).click();
+        $(linkText("Сопровождение КД")).shouldBe(enabled).click();
+        $(linkText("Вынести на просрочку")).click();
         $("#field").shouldBe(exist).clear();
         $("#field").sendKeys("16102017");
         $("[ng-click='ok()']").click();
@@ -55,8 +57,8 @@ public class Sudebka extends Setup {
         $("[ng-click='$ctrl.cancel()']").shouldBe(exist).click();
         $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
         //4
-        $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
-        $(By.linkText("Вынести на просрочку")).click();
+        $(linkText("Сопровождение КД")).shouldBe(enabled).click();
+        $(linkText("Вынести на просрочку")).click();
         $("#field").shouldBe(exist).clear();
         $("#field").sendKeys("16112017");
         $("[ng-click='ok()']").click();
@@ -115,8 +117,8 @@ public class Sudebka extends Setup {
 
     @Test(priority = 3)
     public void Parametrs1646() {
-        $(By.linkText("Редактирование КД")).click();
-        $(By.linkText("Взять на редактирование")).click();
+        $(linkText("Редактирование КД")).click();
+        $(linkText("Взять на редактирование")).click();
         ClickAndWaitModal("[ng-click='$ctrl.ok()']");
         //TODO Махинации в параметрах договора
 
@@ -195,20 +197,20 @@ public class Sudebka extends Setup {
     }
    @Test(priority = 5)
    public void Isparav1646(){
-       $(By.linkText("Сопровождение КД")).click();
-       $(By.linkText("Регистры")).scrollIntoView(true).click();
+       $(linkText("Сопровождение КД")).click();
+       $(linkText("Регистры")).scrollIntoView(true).click();
        $$("[ng-repeat='node in item.value']").shouldHaveSize(109);
        try {
-           $(By.linkText("Требования по неустойке по просроченным % на просроченный ОД - начисление в КМ")).click();
-           $(By.linkText("Операции")).shouldBe(exist).click();
+           $(linkText("Требования по неустойке по просроченным % на просроченный ОД - начисление в КМ")).click();
+           $(linkText("Операции")).shouldBe(exist).click();
        }
        catch (ElementNotFound ex)
        {
-           $(By.linkText("Требования по неустойке по просроченным % на просроченный ОД - начисление в КМ")).click();
-           $(By.linkText("Операции")).shouldBe(exist).click();
+           $(linkText("Требования по неустойке по просроченным % на просроченный ОД - начисление в КМ")).click();
+           $(linkText("Операции")).shouldBe(exist).click();
        }
 
-       $(By.linkText("Исправительная операция")).click();
+       $(linkText("Исправительная операция")).click();
        $("#execDate").shouldBe(exist).clear();
        $("#execDate").sendKeys("18122017");
        $("#amountSpending").clear();
@@ -218,19 +220,19 @@ public class Sudebka extends Setup {
        $("[ng-repeat='row in data.rows']",0).shouldHave(
                text("18.12.2017"),text("0.00"),text("287.18"),text("0.00"),text("RUB"),text("0.00")
        );
-       $(".breadcrumb").find(By.linkText("Регистры учета")).click();
+       $(".breadcrumb").find(linkText("Регистры учета")).click();
        $$("[ng-repeat='node in item.value']").shouldHaveSize(109);
 
        try {
-           $(By.linkText("Требования по неустойке по просроченным % - начисление в КМ")).click();
-           $(By.linkText("Операции")).shouldBe(exist).click();
+           $(linkText("Требования по неустойке по просроченным % - начисление в КМ")).click();
+           $(linkText("Операции")).shouldBe(exist).click();
        }
        catch (ElementNotFound ex)
        {
-           $(By.linkText("Требования по неустойке по просроченным % - начисление в КМ")).click();
-           $(By.linkText("Операции")).shouldBe(exist).click();
+           $(linkText("Требования по неустойке по просроченным % - начисление в КМ")).click();
+           $(linkText("Операции")).shouldBe(exist).click();
        }
-       $(By.linkText("Исправительная операция")).click();
+       $(linkText("Исправительная операция")).click();
        $("#execDate").shouldBe(exist).clear();
        $("#execDate").sendKeys("18122017");
        $("#amountSpending").clear();
@@ -240,7 +242,7 @@ public class Sudebka extends Setup {
        $("[ng-repeat='row in data.rows']",0).shouldHave(
                text("18.12.2017"),text("0.00"),text("1 087.63"),text("0.00"),text("RUB"),text("0.00")
        );
-       $(".breadcrumb").find(By.linkText("КД №ДКА-1646 ФЛ Шмаков Виталий Се")).click();
+       $(".breadcrumb").find(linkText("КД №ДКА-1646 ФЛ Шмаков Виталий Се")).click();
        //$$("[ng-repeat='item in regTree track by $index']").findBy(matchesText("Требования по неустойке по просроченным % на просроченный ОД - начисление в КМ")).find(By.linkText(""))
 
    }
@@ -248,8 +250,8 @@ public class Sudebka extends Setup {
 
     @Test(priority = 6)
     public void AddAccounts(){
-        $(By.linkText("Редактирование КД")).shouldBe(exist).click();
-        $(By.linkText("Поставить на учет")).click();
+        $(linkText("Редактирование КД")).shouldBe(exist).click();
+        $(linkText("Поставить на учет")).click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
         $("[ng-click='openOperationDayModalCalendar()']").click();
         $("#operationDayDate").clear();
@@ -262,8 +264,17 @@ public class Sudebka extends Setup {
         $("#page-wrapper").click();
         $("#accCategoryIdModal").selectOptionContainingText("Выбытие, погашение имущества (в т.ч. приобретенных прав требований)");
         $("[ng-click='next()']").shouldBe(exist).click();
+
         //$("#accPlanNum").shouldHave(value("61212"));
-        $("[ng-click='next()']").shouldBe(exist,enabled).click();
+        try{
+                $("[ng-click='next()']").shouldBe(exist,enabled).click();
+                }
+            catch (ElementNotFound e)
+            {
+                $("[ng-click='next()']").shouldBe(exist).click();
+                $("[ng-click='next()']").shouldBe(exist,enabled).click();
+            }
+
 
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Счета']]")).shouldBe(exist).scrollIntoView(true).click();
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Счета']]")).shouldBe(attribute("class", "ng-scope active"));
@@ -289,14 +300,14 @@ public class Sudebka extends Setup {
     }
     @Test(priority = 7)
     public void Operations1646(){
-        $(By.linkText("Сопровождение КД")).shouldBe(exist).click();
-        $(By.linkText("Списать задолженность за счет резерва")).scrollIntoView(true).click();
+        $(linkText("Сопровождение КД")).shouldBe(exist).click();
+        $(linkText("Списать задолженность за счет резерва")).scrollIntoView(true).click();
         $("#field").clear();
         $("#field").sendKeys("25122017");
         $("[ng-click='ok()']").shouldBe(exist).click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
-        $(By.linkText("Сопровождение КД")).shouldBe(exist).click();
-        $(By.linkText("Списать безнадежную задолженность с внебаланса")).scrollIntoView(true).click();
+        $(linkText("Сопровождение КД")).shouldBe(exist).click();
+        $(linkText("Списать безнадежную задолженность с внебаланса")).scrollIntoView(true).click();
         $("#field").clear();
         $("#field").sendKeys("26122017");
         $("[ng-click='ok()']").shouldBe(exist).click();
@@ -313,6 +324,6 @@ public class Sudebka extends Setup {
                 (text("1"), text("Списание безнадежной задолженности по просроченному ОД с внебаланса"), text("566 666.66"), text("RUB"), text("566 666.66"));
         $("[items='stepsData'] [ng-repeat='item in items']", 1).shouldHave
                 (text("2"), text("Списание безнадежной задолженности по просроченным процентам с внебаланса"), text("6 054.79"), text("RUB"), text("6 054.79"));
-        $(".breadcrumb").find(By.linkText("Кредитные договоры")).click();
+        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
     }
 }

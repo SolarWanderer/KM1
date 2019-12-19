@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
+import static org.openqa.selenium.By.linkText;
+
 public class Cessions extends Setup {
     @Test(priority = 0)
     public void MoveToCessions() {
@@ -65,12 +67,12 @@ public class Cessions extends Setup {
        // $$("[ng-repeat='row in data.rows']").shouldHaveSize(20).findBy(text("ДКА-2299")).find(By.linkText("ДКА-2299")).click();
         $(By.xpath(".//div[@value='ДКА-2299']")).shouldBe(exist, enabled).click();
         try {
-            $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
+            $(linkText("Сопровождение КД")).shouldBe(enabled).click();
         } catch (ElementNotFound ex) {
             $(By.xpath(".//div[@value='ДКА-2299']")).shouldBe(exist, enabled).click();
-            $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
+            $(linkText("Сопровождение КД")).shouldBe(enabled).click();
         }
-        $(By.linkText("Погасить задолженность")).click();
+        $(linkText("Погасить задолженность")).click();
         $("#accountId").shouldBe(exist).selectOptionContainingText("47422810100000002299");
         $("#repaymentDate").clear();
         $("#repaymentDate").sendKeys("16082017");
@@ -79,29 +81,29 @@ public class Cessions extends Setup {
         $("#page-top [style='z-index: 1040;']").shouldBe(exist);
         $("[ng-click='$ctrl.cancel()']").click();
         $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
-        $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
-        $(By.linkText("Структура задолженности")).click();
+        $(linkText("Сопровождение КД")).shouldBe(enabled).click();
+        $(linkText("Структура задолженности")).click();
         $("#operationDate").shouldBe(visible).clear();
         $("#operationDate").sendKeys("16092017");
         TryStructure("23 248.86");
         //$("[ng-click='continueDebtStructure()']").click();
 
        // $("[ng-repeat='c in sum']").shouldHave(text("ИТОГО:"),text("23 248.86"), text("RUB"));
-        //$("[ng-click='cancel()']").click();
-        $(By.xpath("//ol[contains(@class,'breadcrumb')]//a[text()='Кредитные договоры']")).click();
+        $("[ng-click='cancel()']").click();
+        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
 
     }
     @Test(priority = 4)
     public void operation2288() {
         $(By.xpath(".//div[@value='ДКА-2288']")).shouldBe(exist, enabled).click();
         try {
-            $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
+            $(linkText("Сопровождение КД")).shouldBe(enabled).click();
         } catch (ElementNotFound ex) {
             $(By.xpath(".//div[@value='ДКА-2288']")).shouldBe(exist, enabled).click();
-            $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
+            $(linkText("Сопровождение КД")).shouldBe(enabled).click();
         }
 
-        $(By.linkText("Вынести на просрочку")).click();
+        $(linkText("Вынести на просрочку")).click();
         $("#field").shouldBe(exist).clear();
         $("#field").sendKeys("16082017");
         $("[ng-click='ok()']").click();
@@ -109,8 +111,8 @@ public class Cessions extends Setup {
         $("[ng-click='$ctrl.cancel()']").shouldBe(exist).click();
         $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
         //Погашение задолженности
-        $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
-        $(By.linkText("Погасить задолженность")).click();
+        $(linkText("Сопровождение КД")).shouldBe(enabled).click();
+        $(linkText("Погасить задолженность")).click();
         $("#accountId").shouldBe(exist).selectOptionContainingText("47422810100000002288");
         $("#repaymentDate").clear();
         $("#repaymentDate").sendKeys("16092017");
@@ -120,7 +122,7 @@ public class Cessions extends Setup {
         $("[ng-click='$ctrl.cancel()']").click();
         $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
         //TODO Проверки
-        $(By.xpath("//ol[contains(@class,'breadcrumb')]//a[text()='Кредитные договоры']")).click();
+        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
 
     }
 

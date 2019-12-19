@@ -6,16 +6,25 @@ import org.openqa.selenium.By;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class Setup {
     public static String str;
     public static String name;
     public static String xpath;
     public static String product;
+    public static String id2139=null;
+    public static String kgrko=null;
 
    public static String randomString(String chars, int length) {
         Random rand = new Random();
@@ -49,6 +58,7 @@ public class Setup {
     }
     public static void ClickAndWaitModal(String css){
        sleep(1000);
+        Configuration.timeout=10000;
         $(css).shouldBe(exist).click();
         try {
             $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
@@ -58,9 +68,11 @@ public class Setup {
             $(css).shouldBe(exist).click();
             $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
         }
+        Configuration.timeout=60000;
     }
     public static void TryStructure(String value){
        sleep(1000);
+       Configuration.timeout=10000;
        try {
            $("[ng-click='continueDebtStructure()']").click();
            $(".table [ng-repeat='c in sum']").shouldHave(text("ИТОГО:"),text(value), text("RUB"));
@@ -69,24 +81,79 @@ public class Setup {
            $("[ng-click='continueDebtStructure()']").click();
            $(".table [ng-repeat='c in sum']").shouldHave(text("ИТОГО:"),text(value), text("RUB"));
     }
+        Configuration.timeout=60000;
    }
+   public static void GoToReestr(String main, String menu)
+   {
+
+       boolean a=  $$("#side-menu li").findBy(text(main)).find("ul").getAttribute("class").endsWith("collapse in");
+       System.out.println("a= "+!a);
+       if (!a)
+       {
+          // System.out.println($$("#side-menu li").findBy(text(main)).find(By.linkText(main)).getAttribute("class"));
+           $$("#side-menu li").findBy(text(main)).find(By.linkText(main)).click();
+           sleep(600);
+       }
+       $$("#side-menu li").findBy(text(main)).find(By.linkText(menu)).click();
+   }
+public static void GetIdKd() {
+    Pattern pt = Pattern.compile("=([\\d]+?)&");
+    Matcher mt = pt.matcher(url());
+    if (mt.find()) {
+        id2139 = mt.group(1);
+    } else {
+        System.out.println("Not found");
+    }
+}
+public static void generate() throws IOException {
+    int i=0;
+    File myFoo = new File("C:/Users/k.melnikov/Documents/tests/accnumber.txt");
+    FileOutputStream fooStream = new FileOutputStream(myFoo, false);
+    byte[] myBytes;
+    while(i<1200)
+    {
+        if(i<10)
+        {
+
+            myBytes=("6040781000000000000"+i+"\n").getBytes();
+        }
+        else if(i<100){
+
+            myBytes=("604078100000000000"+i+"\n").getBytes();
+        }
+        else if (i<1000)
+        {
+
+            myBytes=("60407810000000000"+i+"\n").getBytes();
+        }
+        else
+        {
+
+            myBytes=("6040781000000000"+i+"\n").getBytes();
+        }
+        fooStream.write(myBytes);
+        i++;
+    }
+    fooStream.close();
+}
 
     @BeforeSuite
-        public void SettingBrowser() {
+        public void SettingBrowser() throws IOException {
         String chars = "123456789";
         //name = "Тесты"+randomString(chars,3);
         product= "Кредитный продукт" + randomString(chars,3);
-        name="ПМИ17.12_1";
+        name="Тест1";
         str = Generate_inn(randomString(chars, 10));
         xpath = "//DIV[@class='full-height-scroll']//TD[@class='ng-binding'][text()='" + name + "']";
         System.setProperty("webdriver.chrome.driver", "C://Users//k.melnikov//IdeaProjects//KM//chromedriver.exe");
         System.setProperty("selenide.browser", "Chrome");
         Configuration.startMaximized=true;
-        Configuration.timeout= 30000;
-
+        Configuration.timeout= 60000;
+//generate();
 
         Configuration.holdBrowserOpen = true;
         open("http://asv-km-t-bl2.dfu.i-teco.ru/km/login");
+
 
         }
 

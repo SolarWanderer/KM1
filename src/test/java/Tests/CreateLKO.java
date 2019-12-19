@@ -21,6 +21,7 @@ public class CreateLKO extends Setup {
         $("#shortName").sendKeys(name);
         $("#corrAccNum").sendKeys(randomString(chars,5));
         $("#kgrko").sendKeys(randomString(chars,5));
+            kgrko=$("#kgrko").getValue();
         $("[ng-click='next()'][type='button']").click();
         $(By.id("stepWizard")).shouldBe(matchesText("Шаг 2 из 6"));
         $("#licRevocationDate").shouldBe(enabled).sendKeys("11082017");

@@ -9,6 +9,8 @@ import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
+import static org.openqa.selenium.By.linkText;
+
 public class OperationsFL extends Setup {
     @Test(priority = 0)
     public void MoveToKdReestr() {
@@ -24,13 +26,13 @@ public class OperationsFL extends Setup {
     public void Operation2139() {
         $(By.xpath(".//div[@value='ДКИ-2139']")).shouldBe(exist, enabled).click();
         try {
-            $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
+            $(linkText("Сопровождение КД")).shouldBe(enabled).click();
         } catch (ElementNotFound ex) {
             $(By.xpath(".//div[@value='ДКИ-2139']")).shouldBe(exist, enabled).click();
-            $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
+            $(linkText("Сопровождение КД")).shouldBe(enabled).click();
 
         }
-        $(By.linkText("Погасить задолженность")).click();
+        $(linkText("Погасить задолженность")).click();
         $("#accountId").shouldBe(exist).selectOptionContainingText("47422810000000002139");
         $("#repaymentDate").clear();
         $("#repaymentDate").sendKeys("11092017");
@@ -41,7 +43,7 @@ public class OperationsFL extends Setup {
         $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Графики']]")).click();
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Графики']]")).shouldBe(attribute("class", "ng-scope active"));
-        $(By.linkText("График аннуитетных платежей")).click();
+        $(linkText("График аннуитетных платежей")).click();
         // $(By.xpath("//H5[@class='p-l-s ng-binding'][text()='Графики']/../..//A[@class=''][text()='График аннуитетных платежей']")).shouldBe(exist).click();
         $$("[ng-click='onRowClick(row)']").shouldHaveSize(7);
         $(By.xpath("//ol[contains(@class,'breadcrumb')]//*[text()='КД №ДКИ-2139 ФЛ Жуков Сергей Игор']")).click();
@@ -105,7 +107,7 @@ public class OperationsFL extends Setup {
                 (text("1"), text("Начисление процентов на ОД"), text("Проценты на ОД, набежавшие"), text("3 897.48"), text("RUB"), text("3 897.48"));
         $("[items='stepsData'] [ng-repeat='item in items']", 1).shouldHave
                 (text("3"), text("Учет % по текущему ОД (внебаланс)"), text("Требования по % по ОД-Внебаланс"), text("3 897.48"), text("RUB"), text("3 897.48"));
-        $(By.xpath("//ol[contains(@class,'breadcrumb')]//a[text()='Кредитные договоры']")).click();
+        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
 
     }
 
@@ -113,13 +115,14 @@ public class OperationsFL extends Setup {
     public void Operation2381() {
         $(By.xpath(".//div[@value='ДКА-2381']")).shouldBe(exist, enabled).click();
         try {
-            $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
+           // $(linkText("Сопровождение КД")).shouldBe(enabled).click();
+            $(linkText("Сопровождение КД")).shouldBe(enabled).click();
         } catch (ElementNotFound ex) {
             $(By.xpath(".//div[@value='ДКА-2381']")).shouldBe(exist, enabled).click();
-            $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
+            $(linkText("Сопровождение КД")).shouldBe(enabled).click();
         }
         //Вынесение на просрочку
-        $(By.linkText("Вынести на просрочку")).click();
+        $(linkText("Вынести на просрочку")).click();
         $("#field").shouldBe(exist).clear();
         $("#field").sendKeys("16082017");
         $("[ng-click='ok()']").click();
@@ -127,8 +130,8 @@ public class OperationsFL extends Setup {
         $("[ng-click='$ctrl.cancel()']").shouldBe(exist).click();
         $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
         //Погашение задолженности 16.09.2017
-        $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
-        $(By.linkText("Погасить задолженность")).click();
+        $(linkText("Сопровождение КД")).shouldBe(enabled).click();
+        $(linkText("Погасить задолженность")).click();
         $("#accountId").shouldBe(exist).selectOptionContainingText("47422810100000002381");
         $("#repaymentDate").clear();
         $("#repaymentDate").sendKeys("16092017");
@@ -138,8 +141,8 @@ public class OperationsFL extends Setup {
         $("[ng-click='$ctrl.cancel()'][type='button']").click();
         $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
         //Погашение задолженности 22.09.2017
-        $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
-        $(By.linkText("Погасить задолженность")).click();
+        $(linkText("Сопровождение КД")).shouldBe(enabled).click();
+        $(linkText("Погасить задолженность")).click();
         $("#accountId").shouldBe(exist).selectOptionContainingText("47422810100000002381");
         $("#repaymentDate").clear();
         $("#repaymentDate").sendKeys("22092017");
@@ -152,6 +155,7 @@ public class OperationsFL extends Setup {
         //Досрочное погашение задолженност
 
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='История операций']]")).click();
+
 
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='История операций']]")).shouldBe(attribute("class", "ng-scope active"));
         System.out.println($("[data='operations'] [ng-repeat='row in data.rows']", 0).getText());
@@ -201,7 +205,7 @@ public class OperationsFL extends Setup {
                 (text("28"), text("Восстановление резерва по просроченному ОД"), text("Резерв по просроченному ОД"), text("1 180.56"), text("RUB"), text("1 180.56"));
         $("[items='stepsData'] [ng-repeat='item in items']", 10).shouldHave
                 (text("29"), text("Восстановление резерва по просроченным процентам (баланс)"), text("Резерв по просроченным %-Баланс"), text("428.88"), text("RUB"), text("428.88"));
-        $(By.xpath("//ol[contains(@class,'breadcrumb')]//a[text()='Кредитные договоры']")).click();
+        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
 
 
 
@@ -211,12 +215,12 @@ public class OperationsFL extends Setup {
     public void Operation8400() {
         $(By.xpath(".//div[@value='ДКА-8400']")).shouldBe(exist, enabled).click();
         try {
-            $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
+            $(linkText("Сопровождение КД")).shouldBe(enabled).click();
         } catch (ElementNotFound ex) {
             $(By.xpath(".//div[@value='ДКА-8400']")).shouldBe(exist, enabled).click();
-            $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
+            $(linkText("Сопровождение КД")).shouldBe(enabled).click();
         }
-        $(By.linkText("Начислить проценты")).click();
+        $(linkText("Начислить проценты")).click();
         $("#field").shouldBe(exist).clear();
         $("#field").sendKeys("16082017");
         $("[ng-click='ok()']").click();
@@ -224,8 +228,8 @@ public class OperationsFL extends Setup {
         $("[ng-click='$ctrl.cancel()']").shouldBe(exist).click();
         $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
         //Распоряжение
-        $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
-        $(By.linkText("Добавить распоряжение")).click();
+        $(linkText("Сопровождение КД")).shouldBe(enabled).click();
+        $(linkText("Добавить распоряжение")).click();
         $("#registrationDate").shouldBe(exist).clear();
         $("#registrationDate").sendKeys("14092017");
         $("#operationDate").sendKeys("14092017");
@@ -233,8 +237,8 @@ public class OperationsFL extends Setup {
         $("[ng-click='next()']").click();
         $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
         //Погашение задолженности
-        $(By.xpath("//a[text()='Сопровождение КД']")).shouldBe(exist).click();
-        $(By.linkText("Погасить задолженность")).click();
+        $(linkText("Сопровождение КД")).shouldBe(enabled).click();
+        $(linkText("Погасить задолженность")).click();
         $("#accountId").shouldBe(exist).selectOptionContainingText("47422810100000008400");
         $("#repaymentDate").clear();
         $("#repaymentDate").sendKeys("14092017");
@@ -246,10 +250,10 @@ public class OperationsFL extends Setup {
         //Проверка графика
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Графики']]")).click();
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Графики']]")).shouldBe(attribute("class", "ng-scope active"));
-        $(By.linkText("График погашения основного долга")).click();
+        $(linkText("График погашения основного долга")).click();
 
        $("#paymentAmount").shouldHave(value("15 903.97"));
         $(By.xpath("//ol[contains(@class,'breadcrumb')]//*[text()='КД №ДКА-8400 ФЛ Шмаков Виталий Се']")).click();
-        $(By.xpath("//ol[contains(@class,'breadcrumb')]//a[text()='Кредитные договоры']")).click();
+        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
     }
 }
