@@ -26,7 +26,7 @@ public class ServiserBank extends Setup {
         String[] name={"GRAPHS.txt","INPUT_AMOUNTS.txt","LOANS.txt","REST_ACCOUNTS.txt"};
         if(id2139==null)
         {
-            id2139="8625";
+            id2139="9180";
         }
         File myFoo = new File("C:/Users/k.melnikov/Documents/tests/Банк-сервисер/"+name[0]);
         FileOutputStream fooStream = new FileOutputStream(myFoo, false);
@@ -60,7 +60,7 @@ public class ServiserBank extends Setup {
         FileChannel destChannel = null;
         if(kgrko==null)
         {
-            kgrko="27262";
+            kgrko="48654";
         }
        File source= new File("C:/Users/k.melnikov/Documents/tests/Банк-сервисер/Операции_2207_1111_20171010_20171011_20171012100000.xlsx");
        File dest=new File("C:/Users/k.melnikov/Documents/tests/Банк-сервисер/Операции_"+kgrko+"_1111_20171010_20171011_20171012100000.xlsx");
@@ -78,9 +78,10 @@ public class ServiserBank extends Setup {
         WritePacket();
         copyFileUsingChannel();
     }
-    @Test(priority = 1)
+  @Test(priority = 1)
     public void MoveToULReestr()  {
         GoToReestr("Контрагенты", "Юридические лица");
+        $$(".breadcrumb").findBy(text("Юридические лица")).shouldBe(visible);
         $$("[ng-repeat='row in data.rows']").shouldHave(CollectionCondition.sizeGreaterThan(3));
 
     }
@@ -88,7 +89,7 @@ public class ServiserBank extends Setup {
    @Test(priority = 2)
     public void CreateUL(){
         $("[title='Создать']").shouldBe(exist,enabled).click();
-        $("#shortName").shouldBe(enabled).sendKeys("Банк-сервисер");
+        $("#shortName").shouldBe(enabled).sendKeys(serviser);
         $("#ogrn").sendKeys("6437325323734");
         $("#inn").sendKeys("3008231904");
         $("#kpp").sendKeys("754768475");
@@ -115,7 +116,7 @@ public class ServiserBank extends Setup {
         $("#next").click();
         $("#stepWizard").shouldHave(text("Шаг 10 из 10"));
         $("#next").click();
-        $$("[ng-repeat='row in data.rows']").findBy(text("Банк-сервисер"));
+        $$("[ng-repeat='row in data.rows']").findBy(text(serviser));
 
     }
 
@@ -125,6 +126,7 @@ public class ServiserBank extends Setup {
  public void MoveToPortfolioBank(){
      GoToReestr("Договоры", "Портфели");
      GoToReestr("Портфели", "Для Банка-сервисера");
+     $$(".breadcrumb").findBy(text("Портфели для Банка-сервисера")).shouldBe(visible);
 
  }
 
@@ -136,7 +138,7 @@ public class ServiserBank extends Setup {
      $("[ng-click='findServiceBank()']").click();
      $$("[ng-repeat='row in data.rows']").findBy(text("Банк-сервисер")).find(".iCheck-helper").click();
      $("[title='Выбрать']").click();
-     $("#serviceBankId").shouldHave(value("Банк-сервисер 1111"));
+     $("#serviceBankId").shouldHave(value(serviser+" 1111"));
      $("#next").click();
      $("#stepWizard").shouldHave(text("Шаг 2 из 2"));
      $$("[ng-repeat='row in data.rows']").findBy(text("ДКИ-2139")).find(".iCheck-helper").click();
@@ -162,7 +164,7 @@ public void UnloadPortfolio() {
     $("#date").shouldBe(enabled).clear();
     $("#date").sendKeys("11.09.2017");
     $(".modal-header").click();
-    ClickAndWaitModal("[ng-click='uploadPortfolioDataForServiceBank()']");
+    $("[ng-click='uploadPortfolioDataForServiceBank()']").shouldBe(enabled).click();
     ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
     $(By.linkText("Операции")).shouldBe(enabled).click();
     $(By.linkText("Подтвердить передачу Банку-сервисеру")).click();
@@ -180,6 +182,7 @@ public void UnloadPortfolio() {
 @Test(priority = 6)
 public void LoadoadPayment2139() {
 GoToReestr("Бухгалтерский учет", "Входящие платежи");
+    $$(".breadcrumb").findBy(text("Входящие платежи")).shouldBe(exist);
     $$("[ng-repeat='row in data.rows']").shouldHave(CollectionCondition.sizeGreaterThan(0));
 
 
@@ -219,15 +222,9 @@ public void MoveToJournal() {
 
 
     $$("[ng-repeat='row in data.rows']").shouldHave(CollectionCondition.sizeGreaterThan(0));
-  /* String txt = $$("#side-menu li").findBy(text("Договоры")).getAttribute("class");
-    if (txt.equals("ng-scope active"))
-    {
-        $$("#side-menu li").findBy(text("Договоры")).find(By.linkText("Договоры")).click();
-   }
-*/
     GoToReestr("Договоры","Договоры"); //закрываем меню Договоры
     GoToReestr("Обмен данными", "Журнал взаимодействия с Банками-сервисерами");
-    //GoToReestr("Отчеты","Сверка остатков по счетам и регистрам");
+    $$(".breadcrumb").findBy(text("Журнал взаимодействия с Банками-сервисерами")).shouldBe(visible);
 
 
 }
@@ -237,7 +234,7 @@ public void MoveToJournal() {
         $$("[ng-repeat='row in data.rows']").shouldHave(CollectionCondition.sizeGreaterThan(0));
         $(By.linkText("Операции")).click();
         $(By.linkText("Загрузка реестра операций от Б-С")).click();
-        $("#serviceBankId").shouldBe(exist).selectOptionContainingText("Банк-сервисер");
+        $("#serviceBankId").shouldBe(exist).selectOptionContainingText(serviser);
         $("#documentSelectionButton").sendKeys("C:/Users/k.melnikov/Documents/tests/Банк-сервисер/Операции_"+kgrko+"_1111_20171010_20171011_20171012100000.xlsx");
         $("[ng-click='createDocument()']").click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
@@ -248,7 +245,7 @@ public void MoveToJournal() {
       String path="C:/Users/k.melnikov/Documents/tests/Банк-сервисер/";
       $(byText("Операции")).click();
       $(byText("Возврат договоров")).click();
-      $("#serviceBank").selectOption("Банк-сервисер");
+      $("#serviceBank").selectOption(serviser);
       $("#unloadDate").sendKeys("11102017", Keys.TAB);
 
      // $("#addFileControl").sendKeys(path+"GRAPHS.txt",path+"INPUT_AMOUNTS.txt",path+"LOANS.txt",path+"REST_ACCOUNTS.txt"
@@ -274,10 +271,15 @@ public void MoveToJournal() {
       //$("[ng-click='confirmLoad()'][type='button']").click();
       ClickAndWaitModal("[ng-click='confirmLoad()'][type='button']");
       ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
-
-
-
   }
+    @Test(priority = 10)
+    public void Checkkd(){
+        GoToReestr("Договоры", "Кредитные договоры");
+        $$("[ng-repeat='row in data.rows']").findBy(text("ДКИ-2139")).find(linkText("ДКИ-2139")).click();
+        $(".navbar-navig").find(linkText("История операций")).click();
+        $(".navbar-navig").find(linkText("История операций")).shouldBe(attribute("class", "ng-scope active"));
+        $$("[data='operations'] [ng-repeat='row in data.rows']").shouldHaveSize(12);
+    }
 }
 
 

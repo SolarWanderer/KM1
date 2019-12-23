@@ -14,11 +14,8 @@ import static org.openqa.selenium.By.linkText;
 public class OperationsFL extends Setup {
     @Test(priority = 0)
     public void MoveToKdReestr() {
-        String txt = $(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).getAttribute("class");
-        if (txt.equals("ng-scope")) {
-            $(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).click();
-        }
-        $(By.xpath(".//li[normalize-space(.)='Кредитные договоры']")).click();
+        GoToReestr("Договоры","Кредитные договоры");
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).shouldBe(exist);
 
     }
 
@@ -107,7 +104,7 @@ public class OperationsFL extends Setup {
                 (text("1"), text("Начисление процентов на ОД"), text("Проценты на ОД, набежавшие"), text("3 897.48"), text("RUB"), text("3 897.48"));
         $("[items='stepsData'] [ng-repeat='item in items']", 1).shouldHave
                 (text("3"), text("Учет % по текущему ОД (внебаланс)"), text("Требования по % по ОД-Внебаланс"), text("3 897.48"), text("RUB"), text("3 897.48"));
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
 
     }
 
@@ -205,7 +202,7 @@ public class OperationsFL extends Setup {
                 (text("28"), text("Восстановление резерва по просроченному ОД"), text("Резерв по просроченному ОД"), text("1 180.56"), text("RUB"), text("1 180.56"));
         $("[items='stepsData'] [ng-repeat='item in items']", 10).shouldHave
                 (text("29"), text("Восстановление резерва по просроченным процентам (баланс)"), text("Резерв по просроченным %-Баланс"), text("428.88"), text("RUB"), text("428.88"));
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
 
 
 
@@ -254,6 +251,6 @@ public class OperationsFL extends Setup {
 
        $("#paymentAmount").shouldHave(value("15 903.97"));
         $(By.xpath("//ol[contains(@class,'breadcrumb')]//*[text()='КД №ДКА-8400 ФЛ Шмаков Виталий Се']")).click();
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
     }
 }

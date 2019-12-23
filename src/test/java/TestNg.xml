@@ -6,7 +6,7 @@
     <classes>
         <class name="Tests.Setup" />
           <class name="Tests.Login"></class>
-           <class name="Tests.CreateLKO"></class>
+          <!-- <class name="Tests.CreateLKO"></class>
            <class name="Tests.ChangeLKO"></class>
            <class name="Tests.UploadPacket"/>
           <class name="Tests.SettingAccounts"></class>
@@ -18,7 +18,7 @@
         <class name="Tests.CreditCards"></class>
        <class name="Tests.OperationsUL"></class>
        <class name="Tests.Cessions"></class>
-       <class name="Tests.Sudebka"></class>
+       <class name="Tests.Sudebka"></class>-->
          <class name="Tests.ServiserBank"></class>
         <!-- <class name="Tests.CreateKd2018"></class> -->
     </classes>

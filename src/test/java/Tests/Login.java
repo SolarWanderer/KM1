@@ -15,9 +15,9 @@ public class Login extends Setup {
 
         $("[placeholder='Логин']").sendKeys("melnikov");
         $("[placeholder='Пароль']").sendKeys("melnikov1");
-        $("#loginButton[type='button']").click(); // Waits until element disappears
+        $("#loginButton[type='button']").click();
         $("#organizationButton").shouldBe(exist);
-        $(By.xpath("//BODY[@id='page-top']//TD[text()='Тестовый ФО']")).click();
+        $(By.xpath("//BODY[@id='page-top']//TD[text()='Тест5']")).click();
         $("#organizationButton").click();
         $("#modulNSI [ng-click='showLko()']").click();
         $$("[ng-repeat='row in data.rows']").shouldHave(sizeGreaterThan(0));

@@ -11,17 +11,15 @@ import static org.openqa.selenium.By.linkText;
 public class Rezerv_RVI extends Setup {
     @Test(priority = 0)
     public void MoveToKdReestr() {
-        String txt = $(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).getAttribute("class");
-        if (txt.equals("ng-scope")) {
-            $(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).click();
-        }
-        $(By.xpath(".//li[normalize-space(.)='Кредитные договоры']")).click();
-        $(By.xpath(".//div[@value='ДКА-1646']")).shouldBe(exist, enabled).click();
+        GoToReestr("Договоры","Кредитные договоры");
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).shouldBe(exist);
+
 
     }
 
     @Test(priority = 1)
     public void Rezerv1646() {
+        $(By.xpath(".//div[@value='ДКА-1646']")).shouldBe(exist, enabled).click();
        // $(By.xpath(".//div[@value='ДКА-1646']")).shouldBe(exist, enabled).click();
         try {
             $(By.xpath("//a[text()='Редактирование КД']")).shouldBe(exist).click();;
@@ -73,7 +71,7 @@ public class Rezerv_RVI extends Setup {
                 (matchText("^[0-9]\\d*"), text("Начисление суммы резерва"), text("16.08.2017"), text("Начисление суммы резерва"), text("Исполнена")).find(By.cssSelector("a")).click();
         $("[items='stepsData'] [ng-repeat='item in items']", 0).shouldHave
                 (text("10"), text("Начисление суммы резерва по текущему ОД"), text("Резерв по текущему ОД"), text("459 861.11"), text("RUB"), text("459 861.11"));
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
     }
     @Test(priority = 2)
     public void RezervMass(){
@@ -93,11 +91,8 @@ public class Rezerv_RVI extends Setup {
     }
     @Test(priority = 3)
     public void CreateProduct(){
-        String txt = $(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).getAttribute("class");
-        if (txt.equals("ng-scope")) {
-            $(By.xpath(".//span[normalize-space(.)='Кредитные продукты']/../..")).click();
-        }
-        $(By.xpath(".//li[normalize-space(.)='Кредитные продукты']")).click();
+        GoToReestr("Договоры", "Кредитные продукты");
+        $$(".breadcrumb").findBy(text("Кредитные продукты")).shouldBe(exist);
         $("[ng-bind-html='config.icon'] .fa-plus").shouldBe(exist).click();
         $("#code").shouldBe(enabled,visible).sendKeys(product);
         $("#name").sendKeys(product);
@@ -163,12 +158,8 @@ public class Rezerv_RVI extends Setup {
         $("[ng-click='next()'][type='button']").click();
         $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
         $(By.xpath(".//div[@value='"+product+"']")).shouldBe(exist);
-        txt=$(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).getAttribute("class");
-        if (txt.equals("ng-scope"))
-        {
-            $(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).click();
-        }
-        $(By.xpath(".//li[normalize-space(.)='Кредитные договоры']")).click();
+        GoToReestr("Договоры","Кредитные договоры");
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).shouldBe(exist);
 
        // $("[type='button'][ng-click='next()']").click();
 
@@ -202,11 +193,8 @@ public class Rezerv_RVI extends Setup {
     }
     @Test(priority = 5)
     public void RVIGraph(){
-        String txt = $(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).getAttribute("class");
-        if (txt.equals("ng-scope")) {
-            $(By.xpath(".//span[normalize-space(.)='Кредитные продукты']/../..")).click();
-        }
-        $(By.xpath(".//li[normalize-space(.)='Кредитные продукты']")).click();
+        GoToReestr("Договоры", "Кредитные продукты");
+        $$(".breadcrumb").findBy(text("Кредитные продукты")).shouldBe(exist);
         $(By.xpath(".//div[@value='"+product+"']")).shouldBe(exist).click();
         $(linkText("Операции")).shouldBe(exist).click();
         $(linkText("Сформировать графики платежей РВИ")).click();
@@ -215,12 +203,8 @@ public class Rezerv_RVI extends Setup {
         $("#modalWindow #endDate").sendKeys("31122019");
         $("[ng-click='calc()']").click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
-        txt=$(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).getAttribute("class");
-        if (txt.equals("ng-scope"))
-        {
-            $(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).click();
-        }
-        $(By.xpath(".//li[normalize-space(.)='Кредитные договоры']")).click();
+        GoToReestr("Договоры","Кредитные договоры");
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).shouldBe(exist);
 
     }
     @Test(priority = 6)
@@ -271,7 +255,7 @@ public class Rezerv_RVI extends Setup {
                 (text("2"), text("Погашение текущих процентов (баланс)"), text("Требования по % по ОД-Баланс"), text("9 304.14"), text("RUB"), text("9 304.14"));
         $("[items='stepsData'] [ng-repeat='item in items']", 1).shouldHave
                 (text("3"), text("Погашение текущих процентов (внебаланс)"), text("Требования по % по ОД-Внебаланс"), text("9 695.86"), text("RUB"), text("9 695.86"));
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
     }
 
 }

@@ -7,11 +7,13 @@ import org.testng.annotations.Test;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Condition.*;
+import static org.openqa.selenium.By.linkText;
 
 public class CreateKd2018 extends Setup {
     @Test(priority = 0)
     public void MoveToKdReestr() {
-        GoToReestr("Договоры", "Кредитные договоры");
+        GoToReestr("Договоры","Кредитные договоры");
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).shouldBe(exist);
     }
     @Test(priority = 1)
     public void Create2018() {

@@ -10,11 +10,8 @@ import static org.openqa.selenium.By.linkText;
 public class OperationsUL extends Setup {
     @Test(priority = 0)
     public void MoveToKdReestr() {
-        String txt = $(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).getAttribute("class");
-        if (txt.equals("ng-scope")) {
-            $(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).click();
-        }
-        $(By.xpath(".//li[normalize-space(.)='Кредитные договоры']")).click();
+        GoToReestr("Договоры","Кредитные договоры");
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).shouldBe(exist);
 
     }
    @Test(priority = 1)
@@ -92,7 +89,7 @@ public class OperationsUL extends Setup {
         }
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='История операций']]")).shouldBe(attribute("class", "ng-scope active"));
         //TODO проверки
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
     }
     @Test(priority = 3)
     public void operation777(){
@@ -144,7 +141,7 @@ public class OperationsUL extends Setup {
         $("[ng-click='$ctrl.cancel()']").click();
         $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
         //TODO проверки
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
     }
     @Test(priority = 4)
     public void operation888(){
@@ -173,7 +170,7 @@ public class OperationsUL extends Setup {
         $("#page-top [style='z-index: 1040;']").shouldBe(exist);
         $("[ng-click='$ctrl.cancel()']").click();
         $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
     }
 
 

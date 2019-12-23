@@ -9,19 +9,16 @@ import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
+import static org.openqa.selenium.By.linkText;
 
 public class Entry999 extends Setup {
 
     @Test
     public void entry() {
-        String txt=$(By.xpath(".//span[normalize-space(.)='Бухгалтерский учет']/../..")).getAttribute("class");
-                if (txt.equals("ng-scope"))
-                {
-                    $(By.xpath(".//span[normalize-space(.)='Бухгалтерский учет']/../..")).click();
-                }
-        $(By.xpath(".//li[normalize-space(.)='Проводки']")).click();
-        $(By.linkText("Операции")).shouldHave(exist).click();
 
+        GoToReestr("Бухгалтерский учет", "Проводки");
+        $$(".breadcrumb").findBy(text("Реестр проводок")).shouldBe(exist);
+        $(By.linkText("Операции")).shouldHave(exist).click();
         $(By.linkText("Создать")).click();
         $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
         $(By.xpath("//div//label//*[text()='Шифр *']/../../div//km-select")).click();

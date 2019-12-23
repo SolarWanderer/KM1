@@ -14,11 +14,12 @@ import static org.openqa.selenium.By.linkText;
 public class Cessions extends Setup {
     @Test(priority = 0)
     public void MoveToCessions() {
-        String txt = $(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).getAttribute("class");
-        if (txt.equals("ng-scope")) {
-            $(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).click();
-        }
-        $(By.xpath(".//li[normalize-space(.)='Договоры цессии']")).click();
+
+        GoToReestr("Договоры","Договоры\n" +
+                "цессии");
+       // $(linkText("Кредитные договоры")).click();
+       // System.out.println($(By.xpath("//body[@id='page-top']/div[@class='ng-scope']/div[@id='wrapper']/div[@class='ng-scope']/nav[@class='navbar-default navbar-static-side fixed-left-navigation ng-scope']/div[@class='slimScrollDiv']/div[@class='sidebar-collapse scrollSlim ng-isolate-scope']/ul[@id='side-menu']/li[@class='ng-scope active']/ul[@class='nav nav-second-level collapse in']/li[3]/a[1]")).getText());
+        $$(".breadcrumb").findBy(text("Договоры цессии")).shouldBe(visible);
 
     }
     @Test(priority = 1)
@@ -55,11 +56,8 @@ public class Cessions extends Setup {
 
     @Test(priority = 2)
     public void MoveToKdReestr() {
-        String txt = $(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).getAttribute("class");
-        if (txt.equals("ng-scope")) {
-            $(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).click();
-        }
-        $(By.xpath(".//li[normalize-space(.)='Кредитные договоры']")).click();
+        GoToReestr("Договоры","Кредитные договоры");
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).shouldBe(exist);
 
     }
     @Test(priority = 3)
@@ -90,7 +88,7 @@ public class Cessions extends Setup {
 
        // $("[ng-repeat='c in sum']").shouldHave(text("ИТОГО:"),text("23 248.86"), text("RUB"));
         $("[ng-click='cancel()']").click();
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
 
     }
     @Test(priority = 4)
@@ -122,7 +120,7 @@ public class Cessions extends Setup {
         $("[ng-click='$ctrl.cancel()']").click();
         $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
         //TODO Проверки
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
 
     }
 

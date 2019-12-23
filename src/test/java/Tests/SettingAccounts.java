@@ -8,12 +8,16 @@ import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static org.openqa.selenium.By.linkText;
+
 public class SettingAccounts extends Setup {
     @Test(priority = 0)
     public void MoveToKdReestr() {
 
-        $(By.xpath("//span[text()='Бухгалтерский учет']")).click();
-        $(By.linkText("Наборы счетов")).click();
+        //$(By.xpath("//span[text()='Бухгалтерский учет']")).click();
+       // $(By.linkText("Наборы счетов")).click();
+        GoToReestr("Бухгалтерский учет","Наборы счетов");
+        $$(".breadcrumb").findBy(text("Наборы общих счетов")).shouldBe(exist);
     }
     @Test(priority = 1)
     public void fl(){

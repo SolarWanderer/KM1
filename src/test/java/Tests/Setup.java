@@ -25,6 +25,7 @@ public class Setup {
     public static String product;
     public static String id2139=null;
     public static String kgrko=null;
+    public static String serviser;
 
    public static String randomString(String chars, int length) {
         Random rand = new Random();
@@ -58,7 +59,7 @@ public class Setup {
     }
     public static void ClickAndWaitModal(String css){
        sleep(1000);
-        Configuration.timeout=10000;
+        Configuration.timeout=15000;
         $(css).shouldBe(exist).click();
         try {
             $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
@@ -72,7 +73,7 @@ public class Setup {
     }
     public static void TryStructure(String value){
        sleep(1000);
-       Configuration.timeout=10000;
+       Configuration.timeout=15000;
        try {
            $("[ng-click='continueDebtStructure()']").click();
            $(".table [ng-repeat='c in sum']").shouldHave(text("ИТОГО:"),text(value), text("RUB"));
@@ -92,7 +93,7 @@ public class Setup {
        {
           // System.out.println($$("#side-menu li").findBy(text(main)).find(By.linkText(main)).getAttribute("class"));
            $$("#side-menu li").findBy(text(main)).find(By.linkText(main)).click();
-           sleep(600);
+           sleep(1000);
        }
        $$("#side-menu li").findBy(text(main)).find(By.linkText(menu)).click();
    }
@@ -141,8 +142,9 @@ public static void generate() throws IOException {
         public void SettingBrowser() throws IOException {
         String chars = "123456789";
         //name = "Тесты"+randomString(chars,3);
+        serviser="Банк-сервисер"+randomString(chars,3);
         product= "Кредитный продукт" + randomString(chars,3);
-        name="Тест1";
+        name="Тест5";
         str = Generate_inn(randomString(chars, 10));
         xpath = "//DIV[@class='full-height-scroll']//TD[@class='ng-binding'][text()='" + name + "']";
         System.setProperty("webdriver.chrome.driver", "C://Users//k.melnikov//IdeaProjects//KM//chromedriver.exe");

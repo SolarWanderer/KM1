@@ -13,12 +13,13 @@ public class ChangeLKO extends Setup {
     public void changeLKO(){
         $("[ng-click='openOrganizationSelection()']").click();
         $("h4.modal-title").shouldHave(Condition.matchesText("Выбор организации"));
+        sleep(1000);
         try {
-            $$(".modal-body tr").findBy(matchesText(name)).scrollIntoView(true).click();
+            $(By.xpath(xpath)).scrollIntoView(false).click();
         }
         catch (ElementNotFound ex)
         {
-            $(By.xpath(xpath)).scrollIntoView(true).click();
+            $(By.xpath(xpath)).scrollIntoView(false).click();
         }
 
 

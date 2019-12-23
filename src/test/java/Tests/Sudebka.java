@@ -11,12 +11,8 @@ import static org.openqa.selenium.By.linkText;
 public class Sudebka extends Setup {
     @Test(priority = 0)
     public void MoveToKdReestr() {
-        String txt=$(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).getAttribute("class");
-        if (txt.equals("ng-scope"))
-        {
-            $(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).click();
-        }
-        $(By.xpath(".//li[normalize-space(.)='Кредитные договоры']")).click();
+        GoToReestr("Договоры","Кредитные договоры");
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).shouldBe(exist);
 
     }
     @Test(priority = 1)
@@ -71,6 +67,8 @@ public class Sudebka extends Setup {
         $$("[data='operations'] [ng-repeat='row in data.rows']").filterBy(text("Начисление процентов")).shouldHaveSize(7);
         $$("[data='operations'] [ng-repeat='row in data.rows']").filterBy(text("Вынесение на просрочку")).shouldHaveSize(4);
         $$("[data='operations'] [ng-repeat='row in data.rows']").filterBy(text("Начисление неустоек")).shouldHaveSize(3);
+
+
 
 
     }
@@ -220,7 +218,7 @@ public class Sudebka extends Setup {
        $("[ng-repeat='row in data.rows']",0).shouldHave(
                text("18.12.2017"),text("0.00"),text("287.18"),text("0.00"),text("RUB"),text("0.00")
        );
-       $(".breadcrumb").find(linkText("Регистры учета")).click();
+       $$(".breadcrumb").findBy(text("Регистры учета")).find(linkText("Регистры учета")).click();
        $$("[ng-repeat='node in item.value']").shouldHaveSize(109);
 
        try {
@@ -242,10 +240,12 @@ public class Sudebka extends Setup {
        $("[ng-repeat='row in data.rows']",0).shouldHave(
                text("18.12.2017"),text("0.00"),text("1 087.63"),text("0.00"),text("RUB"),text("0.00")
        );
-       $(".breadcrumb").find(linkText("КД №ДКА-1646 ФЛ Шмаков Виталий Се")).click();
+       $$(".breadcrumb").findBy(text("КД №ДКА-1646 ФЛ Шмаков Виталий Се")).find(linkText("КД №ДКА-1646 ФЛ Шмаков Виталий Се")).click();
        //$$("[ng-repeat='item in regTree track by $index']").findBy(matchesText("Требования по неустойке по просроченным % на просроченный ОД - начисление в КМ")).find(By.linkText(""))
 
    }
+
+
 
 
     @Test(priority = 6)
@@ -260,19 +260,22 @@ public class Sudebka extends Setup {
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Счета']]")).scrollIntoView(true).click();
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='Счета']]")).shouldBe(attribute("class", "ng-scope active"));
         $("#accounts #picAdd").shouldBe(enabled).click();
-        $("input#accPlanNum").shouldBe(exist).sendKeys("61212");
-        $("#page-wrapper").click();
+        //$("input#accPlanNum").shouldBe(exist).sendKeys("61212");
+        //$("#page-wrapper").click();
         $("#accCategoryIdModal").selectOptionContainingText("Выбытие, погашение имущества (в т.ч. приобретенных прав требований)");
+        ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
+        $("#accPlanNum",1).selectOption("61212");
         $("[ng-click='next()']").shouldBe(exist).click();
-
+        $$(".breadcrumb").findBy(text("Открытие л/с")).shouldBe(visible);
         //$("#accPlanNum").shouldHave(value("61212"));
         try{
-                $("[ng-click='next()']").shouldBe(exist,enabled).click();
+            //sleep(2000);
+                $("[ng-click='next()']").waitUntil(enabled,5000).click();
                 }
             catch (ElementNotFound e)
             {
-                $("[ng-click='next()']").shouldBe(exist).click();
-                $("[ng-click='next()']").shouldBe(exist,enabled).click();
+                $("[ng-click='next()']").waitUntil(enabled,5000).click();
+              //  $("[ng-click='next()']").shouldBe(exist,enabled).click();
             }
 
 
@@ -324,6 +327,6 @@ public class Sudebka extends Setup {
                 (text("1"), text("Списание безнадежной задолженности по просроченному ОД с внебаланса"), text("566 666.66"), text("RUB"), text("566 666.66"));
         $("[items='stepsData'] [ng-repeat='item in items']", 1).shouldHave
                 (text("2"), text("Списание безнадежной задолженности по просроченным процентам с внебаланса"), text("6 054.79"), text("RUB"), text("6 054.79"));
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
     }
 }

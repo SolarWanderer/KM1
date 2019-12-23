@@ -25,12 +25,8 @@ import static org.openqa.selenium.By.linkText;
 public class SettingsKD extends Setup {
     @Test(priority = 0)
     public void MoveToKdReestr() {
-        String txt=$(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).getAttribute("class");
-        if (txt.equals("ng-scope"))
-        {
-            $(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).click();
-        }
-        $(By.xpath(".//li[normalize-space(.)='Кредитные договоры']")).click();
+        GoToReestr("Договоры","Кредитные договоры");
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).shouldBe(exist);
         
     }
     @Test(priority = 1)
@@ -76,7 +72,7 @@ public class SettingsKD extends Setup {
         $(By.xpath("//a[text()='Редактирование КД']/..//a[text()='Поставить на учет']")).click();
         //$(By.xpath("//div[@class='modal-content']//button[text()='Закрыть']")).shouldBe(exist).click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
     }
 
     @Test(priority = 3)
@@ -117,7 +113,7 @@ public class SettingsKD extends Setup {
         //WebElement o = $(By.xpath("//DIV[@class='modal-header']/..//BUTTON[@type='button'][text()='Закрыть']"));
         //JavascriptExecutor js = (JavascriptExecutor)driver;
        // js.executeScript("var evt = document.createEvent('MouseEvents');evt.initMouseEvent('click',true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0,null);arguments[0].dispatchEvent(evt);", new Object[]{o});
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
     }
     @Test(priority = 4)
     public void Setting2139() {
@@ -148,7 +144,7 @@ public class SettingsKD extends Setup {
         $(By.xpath("//a[text()='Редактирование КД']/..//a[text()='Поставить на учет']")).click();
         //$(By.xpath("//*[text()='Закрыть']")).shouldBe(exist).click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
     }
     @Test(priority = 5)
     public void Setting2381() {
@@ -181,7 +177,7 @@ public class SettingsKD extends Setup {
        // $(By.xpath("//*[text()='Закрыть']")).shouldBe(exist).click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
 
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
     }
     @Test(priority = 6)
     public void Setting2288() {
@@ -206,8 +202,8 @@ public class SettingsKD extends Setup {
         $(By.xpath("//a[text()='Редактирование КД']/..//a[text()='Поставить на учет']")).click();
        // $(By.xpath("//div[@class='modal-content']//button[text()='Закрыть']")).shouldBe(exist).click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
-       // $(".breadcrumb").find(linkText("Кредитные договоры")).click();
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+       // $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
     }
     @Test(priority = 7)
     public void Setting8400() {
@@ -239,6 +235,6 @@ public class SettingsKD extends Setup {
        // $(By.xpath("//*[text()='Закрыть']")).shouldBe(exist).click();
         ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
 
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
     }
 }

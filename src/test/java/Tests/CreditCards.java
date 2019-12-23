@@ -12,11 +12,8 @@ import static org.openqa.selenium.By.linkText;
 public class CreditCards extends Setup {
     @Test(priority = 0)
     public void MoveToKdReestr() {
-        String txt = $(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).getAttribute("class");
-        if (txt.equals("ng-scope")) {
-            $(By.xpath(".//span[normalize-space(.)='Договоры']/../..")).click();
-        }
-        $(By.xpath(".//li[normalize-space(.)='Кредитные договоры']")).click();
+        GoToReestr("Договоры","Кредитные договоры");
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).shouldBe(exist);
 
     }
     @Test(priority = 1)
@@ -95,7 +92,7 @@ public class CreditCards extends Setup {
                 (text("5"), text("Погашение процентов по просроченному ОД (внебаланс)"), text("Требования по % по просроченному ОД-внебаланс"), text("32.79"), text("RUB"), text("32.79"));
         $("[items='stepsData'] [ng-repeat='item in items']", 3).shouldHave
                 (text("6"), text("Погашение просроченного ОД"), text("Задолженность по просроченному ОД"), text("6 648.29"), text("RUB"), text("6 648.29"));
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
 
     }
     @Test(priority = 2)
@@ -147,7 +144,7 @@ public class CreditCards extends Setup {
        // $(".table tr",3).shouldHave(text("ИТОГО:"),text("15 000.00"), text("RUB"));
         $("[ng-click='cancel()']").click();
         //TODO Проверки
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
     }
     @Test(priority = 3)
     public void KK3006(){
@@ -198,6 +195,6 @@ public class CreditCards extends Setup {
        // $(".table tr",3).shouldHave(text("ИТОГО:"),text("5 000.00"), text("RUB"));
         $("[ng-click='cancel()']").click();
         //TODO Проверки
-        $(".breadcrumb").find(linkText("Кредитные договоры")).click();
+        $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
     }
 }
