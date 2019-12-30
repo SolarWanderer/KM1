@@ -78,6 +78,7 @@ public class ServiserBank extends Setup {
         WritePacket();
         copyFileUsingChannel();
     }
+
   @Test(priority = 1)
     public void MoveToULReestr()  {
         GoToReestr("Контрагенты", "Юридические лица");
@@ -256,7 +257,7 @@ public void MoveToJournal() {
       $("#addFileControl").sendKeys("C:/Users/k.melnikov/Documents/tests/Банк-сервисер/REST_ACCOUNTS.txt");
       $("#addFileControl").sendKeys("C:/Users/k.melnikov/Documents/tests/Банк-сервисер/CREDIT_CARDS.txt");
       $("#addFileControl").sendKeys("C:/Users/k.melnikov/Documents/tests/Банк-сервисер/PACK_DATA.txt");
-      $$(".glyphicon.glyphicon-ok").shouldBe(size(6));
+      $$("[value='item.progress'] [aria-valuetext='100%']").shouldBe(size(6));
       $("button[ng-click='createLoading()']").click();
       $$("[ng-repeat='file in packData.content']").shouldBe(size(6));
       $(By.linkText("Действия с пакетом")).click();
@@ -264,7 +265,7 @@ public void MoveToJournal() {
       ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
       Configuration.timeout=6000000;
       $("[ng-class='getClassForStatus(pack.packageStatusId)']").shouldHave(matchesText("Обработан без ошибок"));
-      Configuration.timeout=60000;
+      Configuration.timeout=timeout;
       $("[type='button'][ng-click='loadData()']").click();
       $(By.linkText("Действия с пакетом")).click();
       $(By.linkText("Утвердить загрузку")).click();
@@ -272,13 +273,16 @@ public void MoveToJournal() {
       ClickAndWaitModal("[ng-click='confirmLoad()'][type='button']");
       ClickAndWaitModal("[ng-click='$ctrl.cancel()']");
   }
+
     @Test(priority = 10)
     public void Checkkd(){
         GoToReestr("Договоры", "Кредитные договоры");
         $$("[ng-repeat='row in data.rows']").findBy(text("ДКИ-2139")).find(linkText("ДКИ-2139")).click();
         $(".navbar-navig").find(linkText("История операций")).click();
-        $(".navbar-navig").find(linkText("История операций")).shouldBe(attribute("class", "ng-scope active"));
-        $$("[data='operations'] [ng-repeat='row in data.rows']").shouldHaveSize(12);
+        $(".navbar-navig").find(linkText("История операций")).parent().shouldBe(attribute("class", "ng-scope active"));
+        //$$("[data='operations'] [ng-repeat='row in data.rows']").shouldHaveSize(12);
+        $$("[data='operations'] [ng-repeat='row in data.rows']").filterBy(text("Исполнена")).shouldHaveSize(3);
+        $$("[data='operations'] [ng-repeat='row in data.rows']").filterBy(text("Архивная")).shouldHaveSize(9);
     }
 }
 

@@ -15,6 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.FileDownloadMode.PROXY;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.url;
 
@@ -26,6 +27,7 @@ public class Setup {
     public static String id2139=null;
     public static String kgrko=null;
     public static String serviser;
+    public static int timeout;
 
    public static String randomString(String chars, int length) {
         Random rand = new Random();
@@ -69,7 +71,7 @@ public class Setup {
             $(css).shouldBe(exist).click();
             $("[modal-render='true'][tabindex='-1']").shouldBe(not(visible));
         }
-        Configuration.timeout=60000;
+        Configuration.timeout=timeout;
     }
     public static void TryStructure(String value){
        sleep(1000);
@@ -82,7 +84,7 @@ public class Setup {
            $("[ng-click='continueDebtStructure()']").click();
            $(".table [ng-repeat='c in sum']").shouldHave(text("ИТОГО:"),text(value), text("RUB"));
     }
-        Configuration.timeout=60000;
+        Configuration.timeout=timeout;
    }
    public static void GoToReestr(String main, String menu)
    {
@@ -111,7 +113,7 @@ public static void generate() throws IOException {
     File myFoo = new File("C:/Users/k.melnikov/Documents/tests/accnumber.txt");
     FileOutputStream fooStream = new FileOutputStream(myFoo, false);
     byte[] myBytes;
-    while(i<1200)
+    while(i<9999)
     {
         if(i<10)
         {
@@ -141,17 +143,21 @@ public static void generate() throws IOException {
     @BeforeSuite
         public void SettingBrowser() throws IOException {
         String chars = "123456789";
+        timeout=15000;
         //name = "Тесты"+randomString(chars,3);
         serviser="Банк-сервисер"+randomString(chars,3);
         product= "Кредитный продукт" + randomString(chars,3);
-        name="Тест5";
+        name="Тест1";
         str = Generate_inn(randomString(chars, 10));
         xpath = "//DIV[@class='full-height-scroll']//TD[@class='ng-binding'][text()='" + name + "']";
         System.setProperty("webdriver.chrome.driver", "C://Users//k.melnikov//IdeaProjects//KM//chromedriver.exe");
         System.setProperty("selenide.browser", "Chrome");
         Configuration.startMaximized=true;
-        Configuration.timeout= 60000;
-//generate();
+        Configuration.timeout= timeout;
+        Configuration.proxyEnabled = true;
+        Configuration.fileDownload = PROXY;
+        Configuration.reportsFolder="C:/Users/k.melnikov/Documents/tests/reports/dowloads";
+generate();
 
         Configuration.holdBrowserOpen = true;
         open("http://asv-km-t-bl2.dfu.i-teco.ru/km/login");

@@ -89,6 +89,9 @@ public class OperationsUL extends Setup {
         }
         $(By.xpath("//div[@class='wrapper-content ng-scope']//li[.//*[text()='История операций']]")).shouldBe(attribute("class", "ng-scope active"));
         //TODO проверки
+        $(linkText("Редактирование КД")).click();
+        $(linkText("Взять на редактирование")).click();
+        ClickAndWaitModal("[ng-click='$ctrl.ok()']");
         $$(".breadcrumb").findBy(text("Кредитные договоры")).find(linkText("Кредитные договоры")).click();
     }
     @Test(priority = 3)
